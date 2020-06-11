@@ -1,0 +1,55 @@
+<html>
+<head>
+<script language="javascript">
+function f11(p1)
+{
+//alert(p1);
+xmlHttp=GetXmlHttpObject()
+  //alert(xmlHttp)
+  url="ajax.jsp?sid="+p1
+  // alert(url)
+   xmlHttp.onreadystatechange=stateChanged
+  xmlHttp.open("GET",url,true)
+    xmlHttp.send(null)
+}
+
+function stateChanged() 
+{ 	
+	var showdata = xmlHttp.responseText;	
+	//alert(showdata)
+	document.getElementById("show").innerHTML=showdata
+}
+
+function GetXmlHttpObject()
+{
+var xmlHttp=null;
+try
+ {
+ // Firefox, Opera 8.0+, Safari
+ xmlHttp=new XMLHttpRequest();
+ }
+catch (e)
+ {
+ //Internet Explorer
+ try
+  {
+  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+  }
+ catch (e)
+  {
+  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+ }
+return xmlHttp;
+}
+
+</script>
+</head>
+<body bgcolor="cyan">
+<form action="student_signups.jsp" method=post>
+Sid:<input type=text name=sid onchange="f11(this.value)"><br>
+<div id="show"></div>
+Name:<input type=text name=nm><br>
+Password:<input type=text name=pass><br>
+<input type=submit value=signup>
+</form></body></html>
